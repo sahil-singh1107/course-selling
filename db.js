@@ -1,28 +1,23 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const dotenv = require('dotenv');
-dotenv.config();
 
-const dbUrl = process.env.DATABASE_URL;
 
-mongoose.connect(dbUrl)
-
-const userSchema = Schema({
+const userSchema = new Schema({
     email: {type: String, unique: true},
     password: String,
     firstName: String, 
     lastName: String
 })
 
-const adminSchema = Schema({
+const adminSchema = new Schema({
     email: {type: String, unique: true},
     password: String,
     firstName: String, 
     lastName: String
 })
 
-const courseSchema = Schema({
+const courseSchema = new Schema({
     title: String,
     description: String,
     price: Number,
@@ -30,7 +25,7 @@ const courseSchema = Schema({
     creatorId: {type: Schema.Types.ObjectId, ref: "admin"}
 })
 
-const purchaseSchema = Schema({
+const purchaseSchema = new Schema({
     userId: {type: Schema.Types.ObjectId, ref: "user"},
     courseId: {type: Schema.Types.ObjectId, ref: "course"}
 })
@@ -44,5 +39,5 @@ module.exports = {
     userModel,
     adminModel,
     courseModel,
-    purchaseModel
+       purchaseModel
 }
